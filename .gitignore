@@ -1,0 +1,9 @@
+# Default folders to ignore
+inputs/
+inputs_full/
+inputs_test/
+outputs/
+
+# Particular file types to ignore
+**/*.tar.gz
+**/*.sif

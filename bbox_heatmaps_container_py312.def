@@ -1,0 +1,5 @@
+Bootstrap: docker
+From: python:3.12
+
+%post
+  python3 -m pip install --no-input pandas matplotlib

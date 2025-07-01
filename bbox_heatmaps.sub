@@ -1,0 +1,19 @@
+executable = centroids.sh
+
+universe = container
+container_image = centroids_container.sif
+
+filename =$Fn($(file))
+
+transfer_input_files = centroids.py, $(file), centroids_container.sif
+transfer_output_remaps = "centroids.jpg = outputs/$(filename)_$(Cluster).jpg"
+
+output = outputs/centroids_$(filename)_$(Cluster).out
+error = outputs/centroids_$(filename)_$(Cluster).err
+log = centroids_$(Cluster).log
+
+request_cpus = 1
+request_memory = 500 MB
+request_disk = 1 GB
+
+queue file matching inputs/*.json
