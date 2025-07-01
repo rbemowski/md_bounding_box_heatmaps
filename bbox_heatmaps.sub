@@ -1,16 +1,16 @@
-executable = centroids.sh
+executable = bbox_heatmaps.sh
 
 universe = container
-container_image = centroids_container.sif
+container_image = bbox_heatmaps_container.sif
 
-filename =$Fn($(file))
+filename = $Fn($(file))
 
-transfer_input_files = centroids.py, $(file), centroids_container.sif
-transfer_output_remaps = "centroids.jpg = outputs/$(filename)_$(Cluster).jpg"
+transfer_input_files = bbox_heatmaps.py, $(file), bbox_heatmaps_container.sif
+transfer_output_remaps = "bbox_heatmap.jpg = outputs/$(filename)_$(Cluster).jpg"
 
-output = outputs/centroids_$(filename)_$(Cluster).out
-error = outputs/centroids_$(filename)_$(Cluster).err
-log = centroids_$(Cluster).log
+output = outputs/bbox_heatmaps_$(filename)_$(Cluster).out
+error = outputs/bbox_heatmaps_$(filename)_$(Cluster).err
+log = bbox_heatmaps_$(Cluster).log
 
 request_cpus = 1
 request_memory = 500 MB

@@ -15,3 +15,5 @@ machine, but that is not the focus now.
 - bbox_heatmaps.py - Logic for creating the heatmaps
 - bbox_heatmaps.sub - Used for HTCondor High Throughput Compute (HTC) jobs
 - bbox_heatmaps.sh - Used to kick off jobx once on the HTC execution points (EP)
+- bbox_heatmaps_container_py312.def - Used to build a container with Apptainer
+

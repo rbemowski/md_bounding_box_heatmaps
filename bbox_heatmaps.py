@@ -64,7 +64,7 @@ def write_plot(animal_centroids, people_centroids, vehicle_centroids):
 
     # Invert Y axis
     plt.gca().invert_yaxis()
-    plt.savefig("centroids.jpg")
+    plt.savefig("bbox_heatmap.jpg")
     plt.close()
 
 # Run Main

@@ -7,6 +7,6 @@ echo "Some debug info"
 pwd
 ls -lh
 
-python3 centroids.py -f *.json
+python3 bbox_heatmaps.py -f *.json
 
 #rm centroids_inputs.tar.gz
