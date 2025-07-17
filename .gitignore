@@ -3,7 +3,10 @@ inputs/
 inputs_full/
 inputs_test/
 outputs/
+.idea/
+.venv/
 
 # Particular file types to ignore
 **/*.tar.gz
 **/*.sif
+
