@@ -7,7 +7,7 @@ filename = $Fn(file)
 
 transfer_input_files = bbox_heatmaps.py, $(file), bbox_heatmaps_container.sif
 #transfer_output_remaps = "bbox_heatmap.jpg = outputs/$(filename)_$(Cluster).jpg"
-transfer_output_remaps = "bbox_heatmap_animals.jpg = outputs/$(filename)_animals.jpg"
+transfer_output_remaps = "bbox_heatmap_animals.jpg = outputs/$(filename)_animals.jpg;bbox_heatmap_people.jpg = outputs/$(filename)_people.jpg;bbox_heatmap_vehicles.jpg = outputs/$(filename)_vehicles.jpg"
 
 output = outputs/bbox_heatmaps_$(filename)_$(Cluster).out
 error = outputs/bbox_heatmaps_$(filename)_$(Cluster).err

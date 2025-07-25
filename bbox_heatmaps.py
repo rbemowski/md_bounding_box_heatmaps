@@ -45,14 +45,16 @@ def main(bbox_filename = "test_md_output.json", min_conf = 0.1):
     vehicles_df = all_bboxes_df[all_bboxes_df['category'] == "3"].reset_index()
 
     animal_bboxes = process_bboxes(animals_df)
-    #people_with_centroids = process_bboxes(people_df)
-    #vehicles_with_centroids = process_bboxes(vehicles_df)
+    people_bboxes = process_bboxes(people_df)
+    vehicle_bboxes = process_bboxes(vehicles_df)
 
     # This can be used when not in production to keep the batch_id intact
     #write_plot(batch_id, animal_bboxes, "animals")
 
     # When running on HTC, use this:
     write_plot("bbox_heatmap", animal_bboxes, "animals")
+    write_plot("bbox_heatmap", people_bboxes, "people")
+    write_plot("bbox_heatmap", vehicle_bboxes, "vehicles")
     # Compound bounding box values to create "heat map"
 
 def process_bboxes(bbox_df):
