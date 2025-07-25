@@ -63,10 +63,16 @@ def process_bboxes(bbox_df):
     #print(heatmap_shape[0], heatmap_shape[1])
     for i in range(0, bbox_df['bbox'].count()):
         this_bbox = bbox_df['bbox'][i]
-        x1pixel,y1pixel,x2pixel,y2pixel = (round(min(this_bbox[0], this_bbox[2]) * (heatmap_shape[1] - 1)),
-                                           round(min(this_bbox[1], this_bbox[3]) * (heatmap_shape[0] - 1)),
-                                           round(max(this_bbox[0], this_bbox[2]) * (heatmap_shape[1] - 1)),
-                                           round(max(this_bbox[1], this_bbox[3]) * (heatmap_shape[0] - 1)))
+        # This should be more correct?
+        x1pixel, y1pixel, x2pixel, y2pixel = (round(this_bbox[2] * (heatmap_shape[1] - 1)),
+                                              round(this_bbox[3] * (heatmap_shape[0] - 1)),
+                                              round(this_bbox[0] * (heatmap_shape[1] - 1)),
+                                              round(this_bbox[1] * (heatmap_shape[0] - 1)))
+        # This, in theory, should be exactly the same as above if the order is always (p2, p1) in the bbox out file.
+        # x1pixel,y1pixel,x2pixel,y2pixel = (round(min(this_bbox[0], this_bbox[2]) * (heatmap_shape[1] - 1)),
+        #                                    round(min(this_bbox[1], this_bbox[3]) * (heatmap_shape[0] - 1)),
+        #                                    round(max(this_bbox[0], this_bbox[2]) * (heatmap_shape[1] - 1)),
+        #                                    round(max(this_bbox[1], this_bbox[3]) * (heatmap_shape[0] - 1)))
         #print(i)
         #print(x1pixel,y1pixel,x2pixel,y2pixel)
         # Loop through all pixels covered by this bounding box and add some value to the pixel
