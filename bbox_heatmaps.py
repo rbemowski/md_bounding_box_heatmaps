@@ -63,10 +63,11 @@ def process_bboxes(bbox_df):
     #print(heatmap_shape[0], heatmap_shape[1])
     for i in range(0, bbox_df['bbox'].count()):
         this_bbox = bbox_df['bbox'][i]
-        print(this_bbox)
+        #print(this_bbox)
 
         # AI believes bounding boxes are [xmin, ymin, width, height]
         # Reference: https://www.learnml.io/posts/a-guide-to-bounding-box-formats/
+        # Get bbox: x1 = x, y1 = y, x2 = add width to x, y2 = add height to y
         x1pixel, y1pixel, x2pixel, y2pixel = (round(this_bbox[0] * (heatmap_shape[1] - 1)),
                                               round(this_bbox[1] * (heatmap_shape[0] - 1)),
                                               round(this_bbox[0] * (heatmap_shape[1] - 1) + this_bbox[2] * (heatmap_shape[1] - 1)),
@@ -77,12 +78,7 @@ def process_bboxes(bbox_df):
         #                                    round(max(this_bbox[0], this_bbox[2]) * (heatmap_shape[1] - 1)),
         #                                    round(max(this_bbox[1], this_bbox[3]) * (heatmap_shape[0] - 1)))
         #print(i)
-        print(x1pixel,y1pixel,x2pixel,y2pixel)
-        # Flip the points if they seem flipped
-        if x1pixel > x2pixel:
-            print("FLIPPED")
-            x1pixel, y1pixel, x2pixel, y2pixel = (x2pixel, y2pixel, x1pixel, y1pixel)
-            print(x1pixel, y1pixel, x2pixel, y2pixel)
+        #print(x1pixel,y1pixel,x2pixel,y2pixel)
         # Loop through all pixels covered by this bounding box and add some value to the pixel
         # Could just use 1, but using the bbox confidence might actually give us some additional info?
         for y in range(y1pixel, y2pixel + 1):
