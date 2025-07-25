@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 from PIL import Image
 
 
-def main(bbox_filename = "test_md_output.json"):
+def main(bbox_filename = "test_md_output.json", min_conf = 0.1):
     bbox_file = pathlib.Path(bbox_filename)
     #print(bbox_file)
     # Import file
@@ -37,7 +37,7 @@ def main(bbox_filename = "test_md_output.json"):
     all_bboxes_df = pd.json_normalize(all_bboxes)
 
     # Filter out low confidence
-    all_bboxes_df = all_bboxes_df[all_bboxes_df['conf'] >= 0.1]
+    all_bboxes_df = all_bboxes_df[all_bboxes_df['conf'] >= min_conf]
 
     # Split into different DFs based on category (reset the indexes to all start at 0)
     animals_df = all_bboxes_df[all_bboxes_df['category'] == "1"].reset_index()
@@ -48,8 +48,11 @@ def main(bbox_filename = "test_md_output.json"):
     #people_with_centroids = process_bboxes(people_df)
     #vehicles_with_centroids = process_bboxes(vehicles_df)
 
-    write_plot(batch_id, animal_bboxes, "animals")
+    # This can be used when not in production to keep the batch_id intact
+    #write_plot(batch_id, animal_bboxes, "animals")
 
+    # When running on HTC, use this:
+    write_plot("bbox_heatmap", animal_bboxes, "animals")
     # Compound bounding box values to create "heat map"
 
 def process_bboxes(bbox_df):
@@ -100,7 +103,7 @@ def write_plot(file_identifier, bboxes, name, color="hot"):
     # plt.gca().invert_yaxis()
     # plt.savefig("bbox_heatmap.jpg")
     plt.imshow(bboxes, cmap=color, interpolation='nearest', vmin=0, vmax=255)
-    plt.savefig(file_identifier + "_" + name + "_HEATMAP.jpg")
+    plt.savefig(file_identifier + "_" + name + ".jpg")
 
     plt.close()
 
@@ -115,6 +118,6 @@ if __name__ == "__main__":
     print(bbox_file)
     # If bbox was defined run with that argument
     if bbox_file is not None:
-        main(bbox_file)
+        main(bbox_file, 0.8)
     else:
         main()
